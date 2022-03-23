@@ -139,12 +139,7 @@ function showQuoteTable(quotes) {
 const aboutMe = document.getElementById('about');
 if (aboutMe !== null) {
   aboutMe.innerHTML = `
-  My name is Duc Tran. I go by Joseph. I graduated from the University of Science
-  with a Bachelor's Degree in computer science major in Saigon, Vietnam, in 1994.
-  Since then, I have built many projects, such as Hotel Management system,
-  Accounting system, Trade Manager, Cyber Station Manager, etc. 
-  by many programming languages, including FoxPro, Visual Basic, Visual C,
-  and database management systems, especially MS SQL Server, MySQL for over twenty years.
+  My name is Duc Tran. I go by Joseph. I graduated from the University of Science with a Bachelor's Degree in computer science major in Saigon, Vietnam, in 1994. Since then, I have cooporated with my co-workers to build many projects, such as Hotel Management system, Accounting system, Trade Manager, Cyber Station Manager, etc. by many programming languages, including FoxPro, Visual Basic, Visual C, and database management systems, especially MS SQL Server, MySQL for over twenty years.
   <br>
   <br>
   In 2017, my family moved to America, and I started my new life here as a warehouse worker.
@@ -155,10 +150,15 @@ if (aboutMe !== null) {
   The second one looks more professional than the first one.
   <br>
   <br>
-  Now, while working for Amazon warehouse, I am studying at the University of Washington to get the certificate program 
-  in full-stack development with JavaScript to broaden my career opportunities 
-  in software development and improve my life. I hope you would give me a chance to get it.
+  Now, while still working at an Amazon warehouse, I am studying at the University of Washington to get the certificate program in “Full-stack Development with JavaScript” to broaden my career opportunities in software development and improve my life. I hope I will have it this year.
   <br>
   <br>
-  Thank you.`;
+  This website is my final project for the first part of the program - Jscript 310B class. I hope you enjoy trying it.
+  <br>
+  <br>
+  Best regards,
+  <br>
+  <br>
+  Joseph Tran
+  `;
 };

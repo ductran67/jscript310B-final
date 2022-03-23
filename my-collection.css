@@ -38,6 +38,11 @@ body {
   color: green;
   font-style: italic;
 }
+.img {
+  margin-left: 20px;
+  margin-bottom: 20px;
+  width: 300px;
+}
 .animated {
   background-repeat: no-repeat;
   background-position: left top;
