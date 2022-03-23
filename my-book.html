@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Collection</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="my-collection.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <!-- Header -->
+    <div class="header" id="quote-header">
+      <div class="my-quotes"></div>
+    </div>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="index.html">Quote collection</a>
+            <a class="nav-link active" aria-current="page" href="#">Book Collection</a>
+            <a class="nav-link" href="book.html">Books Searching...</a>
+            <a class="nav-link" href="about.html">About me</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <hr>
+    <!-- Book Collection -->
+    <div class="row">
+      <div class="col">
+        <!-- Book's list -->
+        <div id="book-btn">
+          <button type="button" id="del-selected-book" class="btn btn-primary">Delete Selected Books</button>
+          <button type="button" id="del-collection" class="btn btn-danger">Delete All</button>
+        </div>
+        <hr>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>&check;</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Author</th>
+              </tr>
+            </thead>
+            <tbody id="book-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; 2022 JSCRIPT 310B</p>
+      <p>Email: dt67@uw.edu</p>
+    </div>
+  </div>
+  <script src="my-collection.js"></script>
+  <script src="api-key.js"></script>
+  <script src="my-book.js"></script>
+</body>
+</html>

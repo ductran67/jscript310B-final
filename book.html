@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Books Searching</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="my-collection.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <!-- Header -->
+    <div class="header" id="quote-header">
+      <div class="my-quotes"></div>
+    </div>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="index.html">Quote collection</a>
+            <a class="nav-link" href="my-book.html">Book Collection</a>
+            <a class="nav-link active" aria-current="page" href="#">Books Searching...</a>
+            <a class="nav-link" href="about.html">About me</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <hr>
+    <!-- Book form -->
+    <div class="row">
+      <div class="col-md-4">
+        <form id="best-books-form">
+          <div class="form-group mb-2">
+            <label for="year">Year:</label>
+            <input 
+              id="year"
+              name="year" 
+              class="form-control" 
+              type="text" 
+              pattern="\d{4}" 
+              placeholder="2022" required/>
+          </div>
+          <div class="form-group mb-2">
+            <label for="month">Month:</label>
+            <input 
+              id="month" 
+              name="month" 
+              class="form-control" 
+              type="text" 
+              placeholder="03"
+              pattern="\d{2}"
+              required/>
+          </div>
+          <div class="form-group mb-2">
+            <label for="date">Date:</label>
+            <input 
+              id="date"
+              name="date" 
+              class="form-control" 
+              type="text" 
+              placeholder="19"
+              pattern="\d{2}"
+              required/>
+          </div>
+          <div class="form-group mb-2">
+            <input id="submit" class="btn btn-primary" type="submit" value="Get Books" />
+          </div>
+        </form>
+      </div>
+      <!-- Book's list -->
+      <div class="col-md-7 offset-md-1" id="books-container">
+        <div>
+          <button type="button" id="select" class="btn btn-primary">Book Selecting</button>
+        </div>
+        <hr>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>&check;</th>
+                <th>Title</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Author</th>
+              </tr>
+            </thead>
+            <tbody id="book-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; 2022 JSCRIPT 310B</p>
+      <p>Email: dt67@uw.edu</p>
+    </div>
+  </div>
+  <script src="my-collection.js"></script>
+  <script src="api-key.js"></script>
+  <script src="book.js"></script>
+</body>
+</html>

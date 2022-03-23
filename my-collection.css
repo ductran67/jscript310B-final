@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 20px;
+  text-align: center;
+  background: #1abc9c;
+}
+
+.my-quotes {
+  display: none;
+}
+
+.content {
+  font-size: x-large;
+  color: white;
+}
+
+.citation {
+  font-style: italic;
+  color: yellow;
+  font-size: large;
+  text-align: right;
+}
+
+.title {
+  color: blue;
+}
+.author {
+  color: green;
+  font-style: italic;
+}
+.animated {
+  background-repeat: no-repeat;
+  background-position: left top;
+  padding-top:20px;
+  margin-bottom:10px;
+  -webkit-animation-duration: 5s;
+  animation-duration: 5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+     opacity: 0;
+     -webkit-transform: translateY(-20px);
+  }
+  100% {
+     opacity: 1;
+     -webkit-transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+     opacity: 0;
+     transform: translateY(-20px);
+  }
+  100% {
+     opacity: 1;
+     transform: translateY(0);
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+/* Footer */
+.footer {
+  padding: 15px;
+  text-align: center;
+  background: rgb(40, 40, 40);
+  color: white;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row, .navbar {   
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Collection</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="my-collection.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <!-- Header -->
+    <div class="header" id="quote-header">
+      <div class="my-quotes">
+        <!-- <p class="content">My default quote.</p>
+        <p class="citation">My default citation</p> -->
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="#">Quote Collection</a>
+            <a class="nav-link" href="my-book.html">Book Collection</a>
+            <a class="nav-link" href="book.html">Books Searching...</a>
+            <a class="nav-link" href="about.html">About me</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <hr>
+    <div class="row">
+      <div class="col-md-4">
+        <form id="quote-form">
+          <div class="form-group green-border-focus mb-2">
+            <label for="quote">My favorite quote:*</label>
+            <textarea class="form-control" id="quote" rows="3" required></textarea>
+          </div>
+          <div class="form-group green-border-focus mb-2">
+            <label for="citation">Citation:*</label>
+            <input id="citation" class="form-control" type="text" placeholder="Citation" required>
+          </div>
+          
+          <div class="form-group mb-2">
+            <input id="submit" class="btn btn-primary" type="submit" value="Add quote" />
+          </div>
+        </form>
+      </div>
+
+      <div class="col-md-7 offset-md-1" id="quote-collection" style="display: none;">
+        <div id="button-group">
+          <button type="button" id="del-selected" class="btn btn-primary">Delete selected quotes</button>
+          <button type="button" id="del-all" class="btn btn-danger">Delete all</button>
+        </div>
+        <hr>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>&check;</th>
+                <th>Quote</th>
+                <th>Citation</th>
+              </tr>
+            </thead>
+            <tbody id="quote-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="footer">
+      <p>&copy; 2022 JSCRIPT 310B</p>
+      <p>Email: dt67@uw.edu</p>
+    </div>
+  </div>
+  <script src="my-collection.js"></script>
+  <script src="my-quote.js"></script>
+</body>
+</html>
