@@ -182,6 +182,9 @@ function showTabularBody(fields, dataSource, tabularForm) {
 const aboutMe = document.getElementById('about');
 if (aboutMe !== null) {
   aboutMe.innerHTML = `
+  Hi there,
+  <br>
+  <br>
   My name is Duc Tran. I go by Joseph. I graduated from the University of Science with a Bachelor's Degree in computer science major in Saigon, Vietnam, in 1994. Since then, I have cooporated with my co-workers to build many projects, such as Hotel Management system, Accounting system, Trade Manager, Cyber Station Manager, etc. by many programming languages, including FoxPro, Visual Basic, Visual C, and database management systems, especially MS SQL Server, MySQL for over twenty years.
   <br>
   <br>
