@@ -35,12 +35,14 @@ function addQuote(quote, citation) {
       if (q.quote === quote && q.citation === citation) {
         exist = true;
         alert('This quote already exists in the quote collection. Please input another quote.')
+        break;
       }
     }
   }
   if (!exist) {
+    const date = new Date().toLocaleString();
     // Add this quote to quote array
-    quoteArray.push({quote, citation});
+    quoteArray.push({quote, citation, date});
     // Store this quote array to my local storage
     localStorage.setItem("myQuoteCollection",JSON.stringify(quoteArray));
   }
@@ -48,13 +50,26 @@ function addQuote(quote, citation) {
 
 // Fires del-all button click listener
 delAllBtn.addEventListener('click', () => {
-  if (confirm('Are you sure to delete all your favorite quotes?')) {
-    // Remove item "myQuoteCollection" from localStorage
-    localStorage.removeItem("myQuoteCollection");
-    // Reset quote array
-    quoteArray = [];
-    // Clear quote list info in HTML page
-    viewQuoteCollection();
+  if (quoteArray.length > 0) {
+    if (confirm('Are you sure to delete all your favorite quotes?')) {
+      // Remove item "myQuoteCollection" from localStorage
+      localStorage.removeItem("myQuoteCollection");
+      // Reset quote array
+      quoteArray = [];
+      // Get quote table element
+      const quoteTb = document.getElementById('quote-table');
+      // Get quote table body element
+      const tbody = document.getElementsByTagName('tbody')[0];
+      if (tbody !== undefined) {
+        // Remove quote body from quote table page
+        quoteTb.removeChild(tbody);
+      }
+  
+      // Run quotes slideshow
+      createQuoteGroup(quoteArray);
+    }    
+  } else {
+    alert('There is nothing to delete!');
   }
 });
 
@@ -62,32 +77,51 @@ delAllBtn.addEventListener('click', () => {
 delSelectedBtn.addEventListener('click', () => {
   // Get the length of the current quote array
   let quoteLen = quoteArray.length;
-  // Get all checkbox elements
-  let quoteCheckBox = document.getElementsByName("quoteCheckBox");
-  // Convert the collection of checkboxes above to an array 
-  const checkList = Array.from(quoteCheckBox, chk => chk.checked);
-  // Filter selected checkbox
-  const selectedQuote = checkList.filter(selected => selected === true);
+  if (quoteLen > 0) {
+    // Get all checkbox elements
+    let quoteCheckBox = document.getElementsByName("checkbox");
+    // Convert the collection of checkboxes above to an array 
+    const checkList = Array.from(quoteCheckBox, chk => chk.checked);
+    // Filter selected checkbox
+    const selectedQuote = checkList.filter(selected => selected === true);
 
-  if (selectedQuote.length === 0) {
-    alert('Please select any quotes that you want to delete!');
-  } else {
-    // Create an empty array to store unchecked-quote list
-    let newQuoteArray = [];
-    // Scan through the checkbox list to skip all selected items
-    for (let i = 0; i < quoteLen; i++) {
-      if (!quoteCheckBox[i].checked) {
-        // Add unchecked item to a new array called newQuoteArray
-        newQuoteArray.push(quoteArray[i]);
+    if (selectedQuote.length === 0) {
+      alert('Please select any quotes that you want to delete!');
+    } else {
+      // Create an empty array to store unchecked-quote list
+      let newQuoteArray = [];
+      // Scan through the checkbox list to skip all selected items
+      for (let i = 0; i < quoteLen; i++) {
+        if (!quoteCheckBox[i].checked) {
+          // Add unchecked item to a new array called newQuoteArray
+          newQuoteArray.push(quoteArray[i]);
+        }
       }
+      // Set quote array = new quote array
+      quoteArray = newQuoteArray;
+      // Remove item "myQuoteCollection" from localStorage
+      localStorage.removeItem("myQuoteCollection");
+      // Store new quote list to local storage
+      localStorage.setItem("myQuoteCollection",JSON.stringify(quoteArray));
+      // Get quote table element
+      const quoteTb = document.getElementById('quote-table');
+      // Get the quote table body element
+      const tbody = document.getElementsByTagName('tbody')[0];
+      // Remove quote table body from quote table
+      quoteTb.removeChild(tbody);
+      // call the function to show the quote table body content
+      const fields = [
+        {name: 'checkbox', type: 'checkbox', value: '&check;'},
+        {name: 'quote', type: 'string', value: 'Quote'},
+        {name: 'citation', type: 'string', value: 'Citation'},
+        {name: 'date', type: 'date', value: 'Collection Date'}
+      ];
+      // Show quote table body on the page
+      showTabularBody(fields, quoteArray, quoteTb);
+      // Update quote slide show
+      createQuoteGroup(quoteArray);
     }
-    // Set quote array = new quote array
-    quoteArray = newQuoteArray;
-    // Remove item "myQuoteCollection" from localStorage
-    localStorage.removeItem("myQuoteCollection");
-    // Store new quote list to local storage
-    localStorage.setItem("myQuoteCollection",JSON.stringify(quoteArray));
-    // call the function to show the list Info
-    viewQuoteCollection();
+  } else {
+    alert('There is nothing to select and delete!');
   }
 });
