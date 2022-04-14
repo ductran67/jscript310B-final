@@ -59,50 +59,48 @@ formEl.addEventListener('submit', function(e) {
 selectBtn.addEventListener('click', () => {
   // Get all checkbox elements
   const bookCheckBox = document.getElementsByName("checkbox");
-  // Convert the collection of checkboxes above to an array 
-  const checkList = Array.from(bookCheckBox, chk => chk.checked);
-  // Filter selected checkbox
-  const selectedBook = checkList.filter(selected => selected === true);
+  // Get selected checkboxes 
+  const checkList = Array.from(bookCheckBox, chk => chk.checked).filter(checked => checked);
 
-  if (selectedBook.length === 0) {
+  if (checkList.length === 0) {
     alert('Please select your favorite books!');
   } else {
-    const bookList = document.getElementsByTagName('tbody')[0].children;
-    for (let i = 0; i < bookList.length; i++) {
-      if (bookCheckBox[i].checked) {
-
-        const title = bookList[i].children[1].textContent;
-        const image = bookList[i].children[2].firstChild.src;
-        const desc = bookList[i].children[3].textContent;
-        const author = bookList[i].children[4].textContent
-        // Check if this book is already exist or not in the book collection
-        if (bookArray.length > 0) {
-          let existBook = false;
-          for (book of bookArray) {
-            if (book.title === title && book.author === author) {
-              existBook = true;
-              break;
-            }
-          }
-          if (!existBook) {
-            // Get the current date
-            const date = new Date().toLocaleString();
-            bookArray.push({title, image, desc, author, date});
-          }
-        } else {
+    // Get book's list from book's tabular-form
+    const booktableCollection = Array.from(document.getElementsByTagName('tbody')[0].children);
+    const selectedBook = booktableCollection
+      .filter((item,index) => bookCheckBox[index].checked)
+      .map(book => book.children);
+    if (bookArray.length > 0) {
+      selectedBook.forEach(item => {
+        const title = item[1].innerHTML;
+        const image = item[2].firstChild.src;
+        const desc = item[3].innerHTML;
+        const author = item[4].innerHTML;
+        const exist = bookArray.filter(book => (book.title === title && book.author === author));
+        if (exist.length === 0) {
+          // Get the current date
           const date = new Date().toLocaleString();
-          bookArray.push({title, image, desc, author, date});
+          bookArray.push({title, image, desc, author, date});          
         }
-      }
+      });
+    } else {
+      selectedBook.forEach(item => {
+        const title = item[1].innerHTML;
+        const image = item[2].firstChild.src;
+        const desc = item[3].innerHTML;
+        const author = item[4].innerHTML;
+        // Get the current date
+        const date = new Date().toLocaleString();
+        bookArray.push({title, image, desc, author, date});          
+      });      
     }
+
     // Store this book array to my local storage 'myBookCollection'
     localStorage.setItem("myBookCollection",JSON.stringify(bookArray));
     // Message alert when done.
     alert('The task has been done!'); 
 
     // Reset all checkboxes of the checkbox list in book table
-    for (let checkbox of bookCheckBox) {
-      checkbox.checked = false;
-    }
+    for (let checkbox of bookCheckBox) {checkbox.checked = false;}
   };
 });

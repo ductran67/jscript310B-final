@@ -28,24 +28,25 @@ formEl.addEventListener('submit', (e) => {
 });
 
 function addQuote(quote, citation) {
-  let exist = false;
+  // let exist = false;
   if (quoteArray.length > 0) {
     // Check if the input quote exists in quote array or not
-    for (const q of quoteArray) {
-      if (q.quote === quote && q.citation === citation) {
-        exist = true;
-        alert('This quote already exists in the quote collection. Please input another quote.')
-        break;
-      }
+    const checkExist = quoteArray.filter(q => (q.quote === quote && q.citation === citation));
+    if (checkExist.length > 0) {
+      alert('This quote already exists in the quote collection. Please input another quote.');
+      return;
+    } else {
+      const date = new Date().toLocaleString();
+      // Add this quote to quote array
+      quoteArray.push({quote, citation, date});
     }
-  }
-  if (!exist) {
+  } else {
     const date = new Date().toLocaleString();
     // Add this quote to quote array
-    quoteArray.push({quote, citation, date});
-    // Store this quote array to my local storage
-    localStorage.setItem("myQuoteCollection",JSON.stringify(quoteArray));
+    quoteArray.push({quote, citation, date});  
   }
+  // Store this quote array to my local storage
+  localStorage.setItem("myQuoteCollection",JSON.stringify(quoteArray));
 }
 
 // Fires del-all button click listener
@@ -64,7 +65,6 @@ delAllBtn.addEventListener('click', () => {
         // Remove quote body from quote table page
         quoteTb.removeChild(tbody);
       }
-  
       // Run quotes slideshow
       createQuoteGroup(quoteArray);
     }    
@@ -80,23 +80,15 @@ delSelectedBtn.addEventListener('click', () => {
   if (quoteLen > 0) {
     // Get all checkbox elements
     let quoteCheckBox = document.getElementsByName("checkbox");
-    // Convert the collection of checkboxes above to an array 
-    const checkList = Array.from(quoteCheckBox, chk => chk.checked);
-    // Filter selected checkbox
-    const selectedQuote = checkList.filter(selected => selected === true);
+    // Get all selected quotes
+    const selectedQuote = quoteArray.filter((item, index) => quoteCheckBox[index].checked);
 
     if (selectedQuote.length === 0) {
       alert('Please select any quotes that you want to delete!');
     } else {
-      // Create an empty array to store unchecked-quote list
-      let newQuoteArray = [];
-      // Scan through the checkbox list to skip all selected items
-      for (let i = 0; i < quoteLen; i++) {
-        if (!quoteCheckBox[i].checked) {
-          // Add unchecked item to a new array called newQuoteArray
-          newQuoteArray.push(quoteArray[i]);
-        }
-      }
+      // Create a new quote array to store unchecked quotes
+      let newQuoteArray = quoteArray.filter((item, index) => !quoteCheckBox[index].checked);
+
       // Set quote array = new quote array
       quoteArray = newQuoteArray;
       // Remove item "myQuoteCollection" from localStorage

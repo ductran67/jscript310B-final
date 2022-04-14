@@ -54,20 +54,13 @@ delSelectedBook.addEventListener('click', () => {
     // Convert the collection of checkboxes above to an array 
     const checkList = Array.from(bookCheckBox, chk => chk.checked);
     // Filter selected checkbox
-    const selectedBook = checkList.filter(selected => selected === true);
+    const checked = checkList.filter(checked => checked);
 
-    if (selectedBook.length === 0) {
+    if (checked.length === 0) {
       alert('Please select any books that you want to delete!');
     } else {
-      // Create an empty array to store unchecked-book list
-      let newBookArray = [];
-      // Scan through the checkbox list to skip all selected items
-      for (let i = 0; i < bookArrayLen; i++) {
-        if (!bookCheckBox[i].checked) {
-          // Add the unchecked item to a new array called newBookArray
-          newBookArray.push(myBook[i]);
-        }
-      }
+      // Create a new array to store unchecked-books
+      const newBookArray = myBook.filter((item, index) => !bookCheckBox[index].checked);
       // Set book array = new book array
       myBook = newBookArray;
       // Remove item "myBookCollection" from the localStorage

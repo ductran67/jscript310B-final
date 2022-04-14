@@ -42,26 +42,24 @@ function createQuoteGroup(quotes) {
   quoteHeader.innerHTML = '';
   // Check if the quotes array is empty or not
   if (quotes.length > 0) {
-    // Looping through quotes array
-    for (let i = 0; i < quotes.length; i++) {
-      // Create a new div
+    const quoteList = quotes.map(item => {
       const quoteDiv = document.createElement('div');
       quoteDiv.className = 'my-quotes animated fadeInDown';
       // Create a new <p> for quote content
       const content = document.createElement('p');
       content.className = 'content';
-      content.innerHTML = quotes[i].quote;
+      content.innerHTML = item.quote;
 
       // Create a new <p> for citation
       const citation = document.createElement('p');
       citation.className = 'citation';
-      citation.innerHTML = quotes[i].citation;
+      citation.innerHTML = item.citation;
       // Append these content & citation elements to quote div
       quoteDiv.appendChild(content);
       quoteDiv.appendChild(citation);
       // Append quote div to quote header
       quoteHeader.appendChild(quoteDiv);
-    }
+    })
   } else {
     // Create a default quote div element
     const quoteDiv = document.createElement('div');
@@ -126,13 +124,13 @@ function showTabularHeader(fields, tabularForm) {
   const headerRow = document.createElement('tr');
 
   // Looping through fields array
-  for (const field of fields) {
-    // Create header column <th> for each field in table header
+  const head = fields.map(col => {
+    // Create header column
     const headerCol = document.createElement('th');
-    headerCol.innerHTML = field.value;
-    // Add this header column to header row
+    headerCol.innerHTML = col.value;
+    // Add this header column to the header row
     headerRow.appendChild(headerCol);
-  }
+  });
   // Adding this header row element to <thead>
   thead.appendChild(headerRow);
   // Add this table head to tabular form
@@ -143,39 +141,33 @@ function showTabularBody(fields, dataSource, tabularForm) {
   // Create a table body for tabular form
   const tbody = document.createElement('tbody');
   // Looping through data source
-  for (let i = 0; i < dataSource.length; i++) {
-    // Create body row element for each record of data source
+  const body = dataSource.map(item => {
+    // Create a table-body row element
     const bodyRow = document.createElement('tr');
-    // loop through the fields array
-    for (let col = 0; col < fields.length; col++) {
-      // Create a column element for each field in body row
+    // Looping through columns
+    const columns = fields.map(col => {
+      // Create a column element for the row
       const bodyCol = document.createElement('td');
-      // Check field type
-      if (fields[col].type === 'checkbox') {
-        bodyCol.innerHTML = `<input type="checkbox" name = ${fields[col].name}>`
-      } else if (fields[col].type === 'image') {
-        // Create an image element
+      if (col.type === 'checkbox') {
+        // Checkbox content for the column
+        bodyCol.innerHTML = `<input type="checkbox" name = ${col.name}>`;
+      } else if (col.type === 'image') {
+        // Image element for this column
         const imageEl = document.createElement('img');
-        imageEl.src = document.getElementById('select') !== null? dataSource[i].book_image : dataSource[i].image;
+        imageEl.src = document.getElementById('select') !== null? item.book_image : item.image;
         imageEl.style.height = 'auto';
         imageEl.style.width = '100%';
         bodyCol.appendChild(imageEl);
       } else {
-        const dataSet = dataSource[i];
-        for (const key in dataSet) {
-          if (key === fields[col].name) {
-            // Get value from data set for this column content.
-            bodyCol.innerHTML = dataSet[key];
-            break;
-          }
-        }
+        bodyCol.innerHTML = item[`${col.name}`];
       }
-      // Add this column to body row element
+      // Add the column element to the row
       bodyRow.appendChild(bodyCol);
-    }
-    // Add this row to table body element
+    });
+    // Add the row to the table body
     tbody.appendChild(bodyRow);
-  }
+  });
+  // Add the table to the tabular form
   tabularForm.appendChild(tbody);
 }
 
